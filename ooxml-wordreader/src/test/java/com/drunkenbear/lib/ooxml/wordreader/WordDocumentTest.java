@@ -2,16 +2,11 @@ package com.drunkenbear.lib.ooxml.wordreader;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.ZipInputStream;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import com.drunkenbear.lib.ooxml.wordreader.WordDocument;
-import com.drunkenbear.lib.ooxml.wordreader.exceptions.InvalidFileException;
-import com.drunkenbear.lib.ooxml.wordreader.exceptions.ParseException;
 
 public class WordDocumentTest {
 
@@ -25,7 +20,7 @@ public class WordDocumentTest {
     @Test
     public void test_parseDocument() throws Exception {
 
-        InputStream in = this.getClass().getResourceAsStream("/test_doc.docx");
+        InputStream in = this.getClass().getResourceAsStream("/docs/doc_multiple_paragraphs.docx");
         ZipInputStream zis = new ZipInputStream(in);
         testee.parse(zis);
 
