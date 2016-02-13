@@ -6,9 +6,9 @@ This repository contains a library that is capable of reading Word Documents in 
 
 ### Why not use Apache POI?
 
-Apache POI is a huge project, containing 10s of thousands of classes. Unfortunately, this causes problems when you want to read word documents in android applications as the android JVM complains when loading more then ~65000 classes.
+Apache POI is a huge project, containing 10s of thousands of classes. Unfortunately, this causes problems when you want to read word documents in android applications as the android JVM complains when loading more then 65536 methods which apache POI exceeds.
 
-This can also be used when simpel word doc reading is required in other java apps and you only want to include a small library to manage it.
+This can also be used when simple word doc reading is required in other java apps and you only want to include a small library to manage it.
 
 ## Building OOXML Reader source
 
