@@ -1,7 +1,10 @@
 package com.drunkenbear.lib.ooxml.wordreader;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -26,14 +29,14 @@ public class WordDocument {
     private InputStream docXmlInputStream;
 
     private String content;
-
+    
     public WordDocument() {
         LOG.debug("Creating Word Document Reader");
     }
 
     public void parse(ZipInputStream zis) throws IOException, InvalidFileException, ParseException {
 
-        LOG.debug("Parsing word document");
+        LOG.debug("Parsing word document from zip input stream");
         InputStream wordDocEntry = ZipFileProcessor.getFileInputStream(zis, OOXMLConstants.WORD_DOCUMENT_XML_FILE);
 
         if(wordDocEntry == null) {
@@ -44,7 +47,26 @@ public class WordDocument {
         parseContent();
 
     }
-    
+
+    public void parse(String absoluteFilePath) throws IOException, InvalidFileException, ParseException {
+        LOG.debug("Parsing word document from file name");
+        File file = new File(absoluteFilePath);
+        if(!file.exists()) {
+            throw new FileNotFoundException("File " + absoluteFilePath + " does not exist.");
+        }
+        ZipFile zipFile = new ZipFile(file);
+        InputStream wordDocEntry = ZipFileProcessor.getFileInputStream(zipFile, OOXMLConstants.WORD_DOCUMENT_XML_FILE);
+
+        if(wordDocEntry == null) {
+            throw new InvalidFileException("File is not ooxml word doc (.docxml)");
+        }
+
+        this.docXmlInputStream = wordDocEntry;
+        parseContent();
+        
+        zipFile.close();
+    }
+
     private void parseContent() throws IOException, ParseException {
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();

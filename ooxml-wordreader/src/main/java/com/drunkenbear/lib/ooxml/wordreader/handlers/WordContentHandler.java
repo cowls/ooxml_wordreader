@@ -21,6 +21,7 @@ public class WordContentHandler extends DefaultHandler {
     private OOXMLElement currentElement;
     private Paragraph currentParagraph;
     private StringBuilder content;
+    private boolean firstLine = true;
     
     public WordContentHandler() {
         this.content = new StringBuilder();
@@ -53,7 +54,12 @@ public class WordContentHandler extends DefaultHandler {
             case TEXT: 
                 if(this.currentParagraph != null && !this.currentParagraph.containsContent()) {
                     //First line of the paragraph
-                    this.content.append(this.currentParagraph.getSeparator());
+                    if(this.firstLine) {
+                        this.firstLine = false;
+                    } else {
+                        this.content.append(this.currentParagraph.getSeparator());
+                    }
+
                     this.currentParagraph.setContainsContent(true);
                 }
                 
@@ -82,7 +88,11 @@ public class WordContentHandler extends DefaultHandler {
         }
         currentElement = null;
     }
-    
+
+    public void endDocument() {
+ 
+    }
+
     public String getParsedContent() {
         return content.toString();
     }
