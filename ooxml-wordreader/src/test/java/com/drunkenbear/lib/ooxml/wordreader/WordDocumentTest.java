@@ -79,5 +79,14 @@ public class WordDocumentTest {
                      "Cell 12\n\nCell 13\n\nCell 14\n\nCell 15\n\nCell 16\n\nCell 17\n\n"+
                      "Cell 18\n", testee.getPlainText());
     }
+    
+    @Test 
+    public void test_parseDocumentDocWithSpecialChars() throws Exception {
+        InputStream in = this.getClass().getResourceAsStream("/docs/doc_specialchars.docx");
+        ZipInputStream zis = new ZipInputStream(in);
+        testee.parse(zis);
+
+        assertEquals("!@£$%^&*()_+=-_’”””’z`~~~/??.<>||}\\\\’;123*-+\n", testee.getPlainText());
+    }
 
 }
