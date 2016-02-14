@@ -34,7 +34,7 @@ public class WordDocumentTest {
         ZipInputStream zis = new ZipInputStream(in);
         testee.parse(zis);
 
-        assertEquals("This is a simple paragraph\n", testee.getContent());
+        assertEquals("This is a simple paragraph\n", testee.getPlainText());
     }
     
     @Test 
@@ -47,7 +47,7 @@ public class WordDocumentTest {
 
         testee.parse(file.getAbsolutePath());
 
-        assertEquals("This is a simple paragraph\n", testee.getContent());
+        assertEquals("This is a simple paragraph\n", testee.getPlainText());
     }
     
     @Test 
@@ -56,7 +56,7 @@ public class WordDocumentTest {
         ZipInputStream zis = new ZipInputStream(in);
         testee.parse(zis);
 
-        assertEquals("HEADER\n\nThis is a simple paragraph\n", testee.getContent());
+        assertEquals("HEADER\n\nThis is a simple paragraph\n", testee.getPlainText());
     }
     
     @Test 
@@ -65,7 +65,7 @@ public class WordDocumentTest {
         ZipInputStream zis = new ZipInputStream(in);
         testee.parse(zis);
 
-        assertEquals("Heading 1\n\nHeading 2\n\nHeading 3\n\nHeading 4\n\nNormal Text\n\nNormal Test no style\n\nHello\n", testee.getContent());
+        assertEquals("Heading 1\n\nHeading 2\n\nHeading 3\n\nHeading 4\n\nNormal Text\n\nNormal Test no style\n\nHello\n", testee.getPlainText());
     }
     
     @Test 
@@ -77,7 +77,7 @@ public class WordDocumentTest {
         assertEquals("Tables\n\nCell 1\n\nCell 2\n\nCell 3\n\nCell 4\n\nCell 5\n\n"+
                      "Cell 6\n\nCell 7\n\nCell 8\n\nCell 9\n\nCell 10\n\nCell 11\n\n"+
                      "Cell 12\n\nCell 13\n\nCell 14\n\nCell 15\n\nCell 16\n\nCell 17\n\n"+
-                     "Cell 18\n", testee.getContent());
+                     "Cell 18\n", testee.getPlainText());
     }
 
 }

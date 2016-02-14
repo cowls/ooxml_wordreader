@@ -83,7 +83,7 @@ public class WordDocument {
         }
     }
     
-    public String getContent() {
+    public String getPlainText() {
         return this.content;
     }
 }
